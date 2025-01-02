@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 function App() {
@@ -12,6 +12,10 @@ function App() {
   });
 
   const [prediction, setPrediction] = useState(0);
+
+  useEffect(() => {
+    setPrediction(0);
+  }, [formData]);
 
   const handleYearChange = (value: number) => {
     let year = Math.round(value);
@@ -236,8 +240,18 @@ function App() {
             <button
               type="button"
               className="flex-1 py-3 px-4 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors"
+              onClick={() =>
+                setFormData({
+                  year: 2024,
+                  presidential: 1,
+                  bachelorsPercent: 30,
+                  averageIncome: 60000,
+                  whitePercent: 50,
+                  averageAge: 38.5,
+                })
+              }
             >
-              Cancel
+              Reset Default
             </button>
             <button
               type="button"
