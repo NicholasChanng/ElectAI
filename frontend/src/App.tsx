@@ -275,7 +275,7 @@ function App() {
                 })
               }
             >
-              Reset Default
+              Reset
             </button>
             <button
               type="button"
