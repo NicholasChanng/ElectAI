@@ -17,15 +17,23 @@ function App() {
     setPrediction(0);
   }, [formData]);
 
-  const handleYearChange = (value: number) => {
+  const handleYearBlur = (value: number) => {
     let year = Math.round(value);
+
+    // Clamp the year within [1980, 2060]
+    year = Math.min(Math.max(year, 1980), 2060);
+
+    // Ensure even number (round up if odd)
     if (year % 2 !== 0) year += 1;
-    // if (year < 1980) year = 1980;
-    // if (year > 2060) year = 2060;
+
     setFormData((prev) => ({ ...prev, year }));
 
-    if (year % 4 == 0) setFormData((prev) => ({ ...prev, presidential: 1 }));
-    else setFormData((prev) => ({ ...prev, presidential: 0 }));
+    // Determine if it's a presidential election year
+    setFormData((prev) => ({ ...prev, presidential: year % 4 === 0 ? 1 : 0 }));
+  };
+
+  const handleYearChange = (value: number) => {
+    setFormData((prev) => ({ ...prev, year: value ? value : 0 }));
   };
 
   const handlePercentageChange = (field: string, value: number) => {
@@ -33,9 +41,35 @@ function App() {
     setFormData((prev) => ({ ...prev, [field]: clampedValue }));
   };
 
-  const handleIncomeChange = (value: number) => {
+  const handleIncomeBlur = (value: number) => {
     const clampedValue = Math.min(Math.max(value, 20000), 100000);
     setFormData((prev) => ({ ...prev, averageIncome: clampedValue }));
+  };
+
+  const handleIncomeChange = (value: number) => {
+    // Update formData without clamping, allowing user input
+    setFormData((prev) => ({
+      ...prev,
+      averageIncome: value ? value : 0,
+    }));
+  };
+
+  const handleAgeChange = (value: number) => {
+    // Update the value as the user types without clamping
+    setFormData((prev) => ({
+      ...prev,
+      averageAge: value ? value : 1,
+    }));
+  };
+
+  const handleAgeBlur = (value: number | string) => {
+    // Clamp the value between 18 and 45 after the user finishes typing
+    let age = typeof value === "string" ? parseInt(value) : value;
+    age = Math.min(Math.max(age, 18), 45); // Clamp to [18, 45]
+    setFormData((prev) => ({
+      ...prev,
+      averageAge: age,
+    }));
   };
 
   const sendData = async () => {
@@ -77,15 +111,16 @@ function App() {
                   min="1980"
                   max="2060"
                   step="2"
-                  value={formData.year}
-                  onChange={(e) => handleYearChange(parseFloat(e.target.value))}
+                  value={formData.year || 1980} // Default to 1980 if empty
+                  onChange={(e) => handleYearBlur(e.target.value)}
                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
               </div>
               <input
                 type="number"
-                value={formData.year}
-                onChange={(e) => handleYearChange(parseInt(e.target.value))}
+                value={formData.year || ""}
+                onChange={(e) => handleYearChange(e.target.value)}
+                onBlur={(e) => handleYearBlur(parseInt(e.target.value))}
                 className="w-24 p-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
               />
             </div>
@@ -142,10 +177,8 @@ function App() {
                   min="20000"
                   max="100000"
                   step="1000"
-                  value={formData.averageIncome}
-                  onChange={(e) =>
-                    handleIncomeChange(parseFloat(e.target.value))
-                  }
+                  value={formData.averageIncome || 20000}
+                  onChange={(e) => handleIncomeChange(e.target.value)}
                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
               </div>
@@ -153,8 +186,9 @@ function App() {
                 <span className="mr-1">$</span>
                 <input
                   type="number"
-                  value={formData.averageIncome}
-                  onChange={(e) => handleIncomeChange(parseInt(e.target.value))}
+                  value={formData.averageIncome || ""}
+                  onChange={(e) => handleIncomeChange(e.target.value)}
+                  onBlur={(e) => handleIncomeBlur(parseInt(e.target.value))}
                   className="w-24 p-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
                 />
               </div>
@@ -212,25 +246,16 @@ function App() {
                   min="18"
                   max="45"
                   step="1"
-                  value={formData.averageAge}
-                  onChange={(e) =>
-                    setFormData((prev) => ({
-                      ...prev,
-                      averageAge: parseInt(e.target.value),
-                    }))
-                  }
+                  value={formData.averageAge || 18} // Default to 18 if empty
+                  onChange={(e) => handleAgeBlur(parseInt(e.target.value))}
                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
               </div>
               <input
                 type="number"
-                value={formData.averageAge}
-                onChange={(e) =>
-                  setFormData((prev) => ({
-                    ...prev,
-                    averageAge: parseInt(e.target.value),
-                  }))
-                }
+                value={formData.averageAge || ""}
+                onChange={(e) => handleAgeChange(e.target.value)}
+                onBlur={(e) => handleAgeBlur(e.target.value)}
                 className="w-20 p-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
               />
             </div>
