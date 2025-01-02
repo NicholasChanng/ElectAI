@@ -62,10 +62,9 @@ function App() {
     }));
   };
 
-  const handleAgeBlur = (value: number | string) => {
+  const handleAgeBlur = (value: number) => {
     // Clamp the value between 18 and 45 after the user finishes typing
-    let age = typeof value === "string" ? parseInt(value) : value;
-    age = Math.min(Math.max(age, 18), 45); // Clamp to [18, 45]
+    const age = Math.min(Math.max(value, 18), 45); // Clamp to [18, 45]
     setFormData((prev) => ({
       ...prev,
       averageAge: age,
