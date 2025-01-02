@@ -86,6 +86,34 @@ function App() {
 
   return (
     <>
+      <header className="flex items-center justify-between whitespace-nowrap border-b border-solid border-b-[#f0f2f4] px-10 py-3">
+        <div className="flex items-center gap-4 text-[#111418]">
+          <div className="size-4">
+            <svg
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g clip-path="url(#clip0_6_535)">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M47.2426 24L24 47.2426L0.757355 24L24 0.757355L47.2426 24ZM12.2426 21H35.7574L24 9.24264L12.2426 21Z"
+                  fill="currentColor"
+                ></path>
+              </g>
+              <defs>
+                <clipPath id="clip0_6_535">
+                  <rect width="48" height="48" fill="white"></rect>
+                </clipPath>
+              </defs>
+            </svg>
+          </div>
+          <h2 className="text-[#111418] text-lg font-bold leading-tight tracking-[-0.015em]">
+            ElectAI
+          </h2>
+        </div>
+      </header>
       <div className="max-w-xl mx-auto p-6 space-y-6">
         <div className="text-center space-y-2">
           <h1 className="text-2xl font-bold">
@@ -111,14 +139,14 @@ function App() {
                   max="2060"
                   step="2"
                   value={formData.year || 1980} // Default to 1980 if empty
-                  onChange={(e) => handleYearBlur(e.target.value)}
+                  onChange={(e) => handleYearBlur(parseInt(e.target.value))}
                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
               </div>
               <input
                 type="number"
                 value={formData.year || ""}
-                onChange={(e) => handleYearChange(e.target.value)}
+                onChange={(e) => handleYearChange(parseInt(e.target.value))}
                 onBlur={(e) => handleYearBlur(parseInt(e.target.value))}
                 className="w-24 p-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
               />
@@ -177,7 +205,7 @@ function App() {
                   max="100000"
                   step="1000"
                   value={formData.averageIncome || 20000}
-                  onChange={(e) => handleIncomeChange(e.target.value)}
+                  onChange={(e) => handleIncomeChange(parseInt(e.target.value))}
                   className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
                 />
               </div>
@@ -186,7 +214,7 @@ function App() {
                 <input
                   type="number"
                   value={formData.averageIncome || ""}
-                  onChange={(e) => handleIncomeChange(e.target.value)}
+                  onChange={(e) => handleIncomeChange(parseInt(e.target.value))}
                   onBlur={(e) => handleIncomeBlur(parseInt(e.target.value))}
                   className="w-24 p-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
                 />
@@ -253,8 +281,8 @@ function App() {
               <input
                 type="number"
                 value={formData.averageAge || ""}
-                onChange={(e) => handleAgeChange(e.target.value)}
-                onBlur={(e) => handleAgeBlur(e.target.value)}
+                onChange={(e) => handleAgeChange(parseFloat(e.target.value))}
+                onBlur={(e) => handleAgeBlur(parseFloat(e.target.value))}
                 className="w-20 p-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 text-right"
               />
             </div>
