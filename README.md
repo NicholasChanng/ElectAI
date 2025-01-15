@@ -19,7 +19,7 @@ To run the project locally, you need:
 
 ### Backend Setup
 
-1. ** Navigate to the Backend Directory **:
+1. **Navigate to the Backend Directory**:
    ```bash
    cd <repository-folder>/backend
    ```
