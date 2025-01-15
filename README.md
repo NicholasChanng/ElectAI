@@ -1,6 +1,6 @@
 # ElectAI
 
-ElectAI is a Machine Learning-powered web application that predicts voter turnout across U.S. states based on demographic and historical data. It features an interactive map-based React frontend and a Flask backend integrated with a Scikit-learn linear regression model. Here are the inputs:
+ElectAI is a Machine Learning-powered web application that predicts voter turnout across U.S. states based on demographic and historical data. It features an interactive React frontend and a Flask backend integrated with a Scikit-learn linear regression model. Here are the inputs:
 - Year
 - Percent with Bachelors Degree or higher
 - Average Income
