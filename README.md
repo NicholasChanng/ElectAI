@@ -68,11 +68,11 @@ To run the project locally, you need:
 
 3. **Start the Development Server**:
    ```bash
-   npm start
+   npm run dev
    ```
    Or, if you're using yarn:
    ```bash
-   yarn start
+   yarn run dev
    ```
    The frontend will start on `http://localhost:3000` by default.
 
