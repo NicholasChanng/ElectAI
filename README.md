@@ -6,6 +6,8 @@ ElectAI is a Machine Learning-powered web application that predicts voter turnou
 - Average Income
 - Percent of Population that is White
 - Average Age
+  
+<img width="1710" alt="electai" src="https://github.com/user-attachments/assets/310f420b-ea14-4daa-89d5-e6814e6f38ed" />
 
 ## Prerequisites
 
